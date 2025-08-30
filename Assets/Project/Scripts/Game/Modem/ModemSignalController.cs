@@ -4,7 +4,7 @@ using UnityEngine;
 public class ModemSignalController : MonoBehaviour
 {
     [Header("Signal Settings")]
-    [SerializeField] private ModemSettings settings;
+    public ModemSettings settings;// { get; private set; }
 
     public float SignalStrength;// { get; private set; }
     public float FluctuationFrequency => settings.fluctuationFrequency;

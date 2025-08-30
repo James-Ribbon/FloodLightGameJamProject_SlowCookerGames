@@ -38,6 +38,7 @@ public class Light : MonoBehaviour, ILight
             LightColorType.Off => lightProfile.OffColour,
             LightColorType.NoConnection => lightProfile.NoConnectionColour,
             LightColorType.Reconnect => lightProfile.ReconnectColour,
+
             LightColorType.Signal => lightProfile.SignalColour,
             _ => lightProfile.OffColour
         };

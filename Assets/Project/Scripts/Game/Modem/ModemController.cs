@@ -4,7 +4,7 @@ using UnityEngine;
 public class ModemController : MonoBehaviour, ISwitch
 {
     [Header("Settings")]
-    [SerializeField] private ModemSettings settings;
+    //[SerializeField] private ModemSettings settings;
 
     [SerializeField] private ModemSignalController signalController;
     [SerializeField] private Light[] lights;
@@ -42,7 +42,7 @@ public class ModemController : MonoBehaviour, ISwitch
         if(connectionCheckTimer <= 0f)
         {
             CheckConnection();
-            connectionCheckTimer = settings.connectionCheckInterval;
+            connectionCheckTimer = signalController.settings.connectionCheckInterval;
         }
 
         //Debug.Log($"Connection Check Timer: {connectionCheckTimer}");
@@ -105,10 +105,10 @@ public class ModemController : MonoBehaviour, ISwitch
             newConnectionStrength = ConnectionStrength.Weak;
         else
             newConnectionStrength = ConnectionStrength.NoConnection;
-        //else if (strength > 0.1f)
-        //newConnectionStrength = ConnectionStrength.AttemptingReconnect;
-        // else
-        //newConnectionStrength = ConnectionStrength.NoConnection;
+        /*else if (strength > 0.1f)
+            newConnectionStrength = ConnectionStrength.AttemptingReconnect;
+        else
+            newConnectionStrength = ConnectionStrength.NoConnection;*/
 
         if (newConnectionStrength != currentConnectionStrength)
         {
@@ -117,7 +117,7 @@ public class ModemController : MonoBehaviour, ISwitch
             //ModemEvents.InvokeConnectionChanged(currentConnectionStrength);
         }
 
-        Debug.Log($"Connection Strength: {newConnectionStrength.ToString()}");
+        //Debug.Log($"Connection Strength: {newConnectionStrength.ToString()}");
     }
 
     private void UpdateLights()
@@ -204,7 +204,7 @@ public class ModemController : MonoBehaviour, ISwitch
             if (reconnectTimer <= 0f)
             {
                 CheckConnection(); // Attempt to reconnect
-                reconnectTimer = settings.reconnectAttemptInterval;
+                reconnectTimer = signalController.settings.reconnectAttemptInterval;
 
                 // Optional: Add visual feedback for reconnection attempts
                 BlinkLightsForReconnection();
@@ -213,7 +213,7 @@ public class ModemController : MonoBehaviour, ISwitch
         else
         {
             // Reset timer when not in reconnection state
-            reconnectTimer = settings.reconnectAttemptInterval;
+            reconnectTimer = signalController.settings.reconnectAttemptInterval;
         }
     }
 
